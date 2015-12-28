@@ -5,6 +5,7 @@ __author__ = 'lizzybradley'
 
 class ConvertToARFF:
 	user_list = []
+	is_class = ['isSuccessful', 'hasFeaturedContent', 'hasMultipleAccounts', 'hasCategoryActivity']
 
 	def __init__(self, csv_filename):
 		self.csv_filename = csv_filename
@@ -22,7 +23,7 @@ class ConvertToARFF:
 		f.write('@relation ' + self.filename + '\n\n')
 
 		for var in vars(self.user_list[0]):
-			if var == 'isSuccessful':
+			if var in self.is_class:
 				f.write('@attribute ' + var + ' {1, 0}\n')
 			elif var != 'username' and var != 'date_of_election' and var != 'gender':
 				f.write('@attribute ' + var + ' ' + 'numeric\n')
@@ -42,5 +43,6 @@ class ConvertToARFF:
 
 		f.close()
 
-convert_to_arff = ConvertToARFF('../Data/15_elections.csv')
+filename = raw_input('Enter Filename: ')
+convert_to_arff = ConvertToARFF('../Data/' + filename + '.csv')
 convert_to_arff.convert()

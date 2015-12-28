@@ -25,7 +25,7 @@ class User:
 	draft_talk_edits = 0
 	talk_edits = 0
 
-	gender = 'unknown'   # Unknown
+	gender = 'unknown'
 
 	days_active = 0
 
@@ -46,6 +46,10 @@ class User:
 	featured_articles = 0
 
 	elections = 0
+
+	hasFeaturedContent = 0
+	hasMultipleAccounts = 0
+	hasCategoryActivity = 0
 
 	def __init__(self, row):
 		self.username             = row['username']
@@ -97,6 +101,10 @@ class User:
 
 		self.elections            = int(row['elections'])
 
+		self.hasFeaturedContent   = int(row['hasFeaturedContent'])
+		self.hasMultipleAccounts  = int(row['hasMultipleAccounts'])
+		self.hasCategoryActivity  = int(row['hasCategoryActivity'])
+
 	def __str__(self):
 		return self.username + ',' + self.date_of_election + ',' + str(self.isSuccessful) + ',' + str(self.votes) + ',' + \
 			str(self.pages_created) + ',' + str(self.total_edits) + ',' + \
@@ -111,4 +119,5 @@ class User:
 			str(self.sp_delete_votes) + ',' + str(self.merge_votes) + ',' + str(self.redirect_votes) + ',' + \
 			str(self.transwiki_votes) + ',' + str(self.userfy_votes) + ',' + \
 			str(self.total_afd_votes) + ',' + str(self.accounts) + ',' + str(self.featured_lists) + ',' + \
-			str(self.featured_articles) + ',' + str(self.elections)
+			str(self.featured_articles) + ',' + str(self.elections) + ',' + str(self.hasFeaturedContent) + ',' + \
+			str(self.hasMultipleAccounts) + ',' + str(self.hasCategoryActivity)
