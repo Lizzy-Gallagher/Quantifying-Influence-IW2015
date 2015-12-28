@@ -51,6 +51,8 @@ class User:
 	hasMultipleAccounts = 0
 	hasCategoryActivity = 0
 
+	images_uploaded = 0
+
 	def __init__(self, row):
 		self.username             = row['username']
 		self.date_of_election     = row['date_of_election']
@@ -105,6 +107,8 @@ class User:
 		self.hasMultipleAccounts  = int(row['hasMultipleAccounts'])
 		self.hasCategoryActivity  = int(row['hasCategoryActivity'])
 
+		self.images_uploaded      = int(row['images_uploaded'])
+
 	def __str__(self):
 		return self.username + ',' + self.date_of_election + ',' + str(self.isSuccessful) + ',' + str(self.votes) + ',' + \
 			str(self.pages_created) + ',' + str(self.total_edits) + ',' + \
@@ -120,4 +124,4 @@ class User:
 			str(self.transwiki_votes) + ',' + str(self.userfy_votes) + ',' + \
 			str(self.total_afd_votes) + ',' + str(self.accounts) + ',' + str(self.featured_lists) + ',' + \
 			str(self.featured_articles) + ',' + str(self.elections) + ',' + str(self.hasFeaturedContent) + ',' + \
-			str(self.hasMultipleAccounts) + ',' + str(self.hasCategoryActivity)
+			str(self.hasMultipleAccounts) + ',' + str(self.hasCategoryActivity) + ',' + str(self.images_uploaded)
