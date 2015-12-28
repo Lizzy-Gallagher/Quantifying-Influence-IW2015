@@ -1,0 +1,55 @@
+You found yourself a dataset. It's got p features that describe the label (y) of each observation.
+You put all of this data in a pandas dataframe. Your columns have some nice labels that let you grab
+features by name, so you can histogram individual ones and calculate some standard stats like mean,
+range, median, etc.
+
+There were some holes in your dataframe though. Not every observation had a value for every feature.
+You did some reading on these features, and you decided that for some of them, it would make the most
+sense to fill in 0 as the value for missing values, and on the rest, it would be best to fill in the
+median of the data that is present. A few features only had values listed for < sqrt(N) of the observations, so we decided to ignore it completely.
+
+Thus, you've got yourself a dataframe of your observations, each of which has a value for every feature,
+as well as a column of labels that you're trying to learn. Lets see what some different algorithms can
+tell us about the relative importance of these features. If some have more predictive power than others,
+that could be interesting in the domain of the problem -- we might learn that some things that we were
+measuring that we thought were important are actually kind of irrelevant, or vise versa. Another benefit
+is if you want to run a more complicated learning algorithm (Neural Net?) and just don't have the time or
+space to run it on such a big data set, you can use notions of variable importance to help represent your
+dataset over a smaller number of features -- only the most important ones.
+
+
+Method 1, PCA:
+
+Take a look at lab_pca_template.py:
+The idea here is to find the principal components of your dataset. If we find the principal components
+that describe a large portion of the variance in the data, we can then look at which of the original
+features actually contributed to generating these Principal Components. Note, in order to determine a
+good learner to use, I've written a quick script in lab_kernels.py to optimize an SVM.
+
+
+Method 2, Lasso Regression:
+
+Take a look at lab_lasso_template.py:
+Here we'll perform Lasso regression, which is normal regression, but with a penalization for high
+coefficients. We penalize on the magnitude of each coefficient (known as the l1 penalization. Note,
+this is not it's square, which is the l2 penalization). We can use another object from the Scikit-learn
+package to help us grab those features that have high coefficients in the Lasso Regression.
+
+
+Method 3, Recursive Feature Elimination with Cross-Validation:
+
+Take a look at lab_rfecv_template.py:
+Here we'll use another learner to inform us about the importance of each feature. We'll recursively
+remove the least important ones and see how well we can still learn.
+
+Method 4, Random Forest Classification:
+
+Take a look at lab_rf_template.py:
+Random forest is an ensemble learner that makes decision trees, each optimized for a subset of the
+data and features, and collectively weighted to create the best learner for new datapoints. Based
+on the frequency with which different features are used as splitting parameters in each tree of the
+random forest, we can determine relative variable importance.
+
+
+
+

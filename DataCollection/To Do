@@ -1,0 +1,5 @@
+(x - meu)/variance
+
+subtract mean divide by the standard dviation (centered at zero and scaled in some way)
+
+This is called Standardization
