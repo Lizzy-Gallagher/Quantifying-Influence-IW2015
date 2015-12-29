@@ -53,6 +53,11 @@ class User:
 
 	images_uploaded = 0
 
+	minor_edits = 0
+	nonminor_edits = 0
+	revert_edits = 0
+	large_edits = 0
+
 	def __init__(self, row):
 		self.username             = row['username']
 		self.date_of_election     = row['date_of_election']
@@ -109,6 +114,9 @@ class User:
 
 		self.images_uploaded      = int(row['images_uploaded'])
 
+		# self.minor_edits          = int(row['minor_edits'])
+		# self.nonminor_edits       = int(row['nonminor_edits'])
+
 	def __str__(self):
 		return self.username + ',' + self.date_of_election + ',' + str(self.isSuccessful) + ',' + str(self.votes) + ',' + \
 			str(self.pages_created) + ',' + str(self.total_edits) + ',' + \
@@ -124,4 +132,5 @@ class User:
 			str(self.transwiki_votes) + ',' + str(self.userfy_votes) + ',' + \
 			str(self.total_afd_votes) + ',' + str(self.accounts) + ',' + str(self.featured_lists) + ',' + \
 			str(self.featured_articles) + ',' + str(self.elections) + ',' + str(self.hasFeaturedContent) + ',' + \
-			str(self.hasMultipleAccounts) + ',' + str(self.hasCategoryActivity) + ',' + str(self.images_uploaded)
+			str(self.hasMultipleAccounts) + ',' + str(self.hasCategoryActivity) + ',' + str(self.images_uploaded) + ',' + \
+			str(self.minor_edits) + ',' + str(self.nonminor_edits) + ',' + str(self.revert_edits) + ',' + str(self.large_edits)
