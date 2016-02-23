@@ -1,0 +1,12 @@
+featured_articles <= 0
+|   featured_lists <= 0: 0 (3049.0/1477.0)
+|   featured_lists > 0: 1 (52.0/20.0)
+featured_articles > 0: 1 (287.0/70.0)
+
+Correctly Classified Instances        1821               53.7485 %
+
+=== Confusion Matrix ===
+
+    a    b   <-- classified as
+  249 1477 |    a = 1
+   90 1572 |    b = 0
