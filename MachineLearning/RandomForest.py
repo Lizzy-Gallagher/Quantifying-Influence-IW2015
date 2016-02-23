@@ -1,6 +1,6 @@
 __author__ = 'lizzybradley'
 
-filename = "../Data/13_accounts.csv"
+filename = "../Data/19_frequency.csv"
 
 # Basic math operations:
 import numpy as np
@@ -17,14 +17,16 @@ import matplotlib.pyplot as plt
 
 X = np.recfromcsv(filename,
                      delimiter=',', case_sensitive=True, deletechars='',
-                     replace_space=' ', usecols=(3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,21,22,23,24,25,26,27,28,29,30))
+                     replace_space=' ', usecols=(3,4,5,14,15,16,17,18,19,21,22,23,24,25,26,27,28,29,30,31,32))
 y = np.recfromcsv(filename,
                      delimiter=',', case_sensitive=True, deletechars='',
                      replace_space=' ', usecols=(2))
                      
 df = pd.DataFrame(X, copy=True)
 # df = (df - df.mean()) / (df.max() - df.min())
-df = (df - df.mean()) / df.std()
+# df = (df - df.mean()) / df.std()
+
+print (df.describe)
 
 # Split into training and testing sets
 p = 0.75

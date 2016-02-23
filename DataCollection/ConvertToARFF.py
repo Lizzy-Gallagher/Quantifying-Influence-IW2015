@@ -20,13 +20,13 @@ class ConvertToARFF:
 
 	def convert(self):
 		f = open(self.filename + '.arff','w')
-		f.write('@relation ' + self.filename + '\n\n')
+		f.write('@RELATION ' + self.filename + '\n\n')
 
 		for var in vars(self.user_list[0]):
 			if var in self.is_class:
-				f.write('@attribute ' + var + ' {1, 0}\n')
-			elif var != 'username' and var != 'date_of_election' and var != 'gender':
-				f.write('@attribute ' + var + ' ' + 'numeric\n')
+				f.write('@ATTRIBUTE ' + var + ' {1,0}\n')
+			elif var != 'username' and var != 'election_date' and var != 'gender':
+				f.write('@ATTRIBUTE ' + var + ' ' + 'NUMERIC\n')
 		f.write('\n\n@data\n')
 
 		for user in self.user_list:

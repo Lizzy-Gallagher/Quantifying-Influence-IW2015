@@ -27,17 +27,17 @@ class AddEditStats:
 			i += 1
 
 			username = user.username
-			date_of_election = datetime.strptime(user.date_of_election, '%Y-%m-%d %H:%M:%S')
+			election_date = datetime.strptime(user.election_date, '%Y-%m-%d %H:%M:%S')
 
-			user.minor_edits = self.collect_minor_edits(username, date_of_election)
-			user.nonminor_edits, user.revert_edits, user.large_edits = self.collect_reg_edits(username, date_of_election)
+			user.minor_edits = self.collect_minor_edits(username, election_date)
+			user.nonminor_edits, user.revert_edits, user.large_edits = self.collect_reg_edits(username, election_date)
 
 			with open('data.csv', 'a') as file_:
 				file_.write(str(user))
 				file_.write('\n')
 
-	def collect_minor_edits(self, username, date_of_election):
-		stop_date = date_of_election.isoformat('T') + 'Z'
+	def collect_minor_edits(self, username, election_date):
+		stop_date = election_date.isoformat('T') + 'Z'
 		isPaging = True
 
 		minor_edits = 0
@@ -57,13 +57,13 @@ class AddEditStats:
 				last_timestamp = r.json()['query']['usercontribs'][possible_contribs - 1]['timestamp']
 				last_datetime = datetime.strptime(last_timestamp, '%Y-%m-%dT%H:%M:%SZ')
 
-				if last_datetime < date_of_election:
+				if last_datetime < election_date:
 					contribs = possible_contribs
 
 				else:
 					for contrib in r.json()['query']['usercontribs']:
 						contrib_timestamp = datetime.strptime(contrib['timestamp'], '%Y-%m-%dT%H:%M:%SZ')
-						if contrib_timestamp < date_of_election:
+						if contrib_timestamp < election_date:
 							contribs += 1
 						else:
 							isPaging = False
@@ -80,8 +80,8 @@ class AddEditStats:
 
 		return minor_edits
 
-	def collect_reg_edits(self, username, date_of_election):
-		stop_date = date_of_election.isoformat('T') + 'Z'
+	def collect_reg_edits(self, username, election_date):
+		stop_date = election_date.isoformat('T') + 'Z'
 		isPaging = True
 
 		nonminor_edits = 0
@@ -98,7 +98,7 @@ class AddEditStats:
 			try:
 				for contrib in r.json()['query']['usercontribs']:
 					contrib_timestamp = datetime.strptime(contrib['timestamp'], '%Y-%m-%dT%H:%M:%SZ')
-					if contrib_timestamp < date_of_election:
+					if contrib_timestamp < election_date:
 						nonminor_edits += 1
 						if 'revert' in contrib['comment'] or 'revision' in contrib['comment'] \
 								or 'Revert' in contrib['comment'] or 'Revision' in contrib['comment']:

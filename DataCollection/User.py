@@ -2,7 +2,7 @@ __author__ = 'lizzybradley'
 
 class User:
 	username = ""
-	date_of_election = ""
+	election_date = ""
 	isSuccessful = 0
 	votes = 0
 	pages_created = 0
@@ -58,9 +58,11 @@ class User:
 	revert_edits = 0
 	large_edits = 0
 
+	edits_per_day = 0.0
+
 	def __init__(self, row):
 		self.username             = row['username']
-		self.date_of_election     = row['date_of_election']
+		self.election_date        = row['election_date']
 		self.isSuccessful         = int(row['isSuccessful'])
 		self.votes                = int(row['votes'])
 		self.pages_created        = int(row['pages_created'])
@@ -114,11 +116,15 @@ class User:
 
 		self.images_uploaded      = int(row['images_uploaded'])
 
-		# self.minor_edits          = int(row['minor_edits'])
-		# self.nonminor_edits       = int(row['nonminor_edits'])
+		self.minor_edits          = int(row['minor_edits'])
+		self.nonminor_edits       = int(row['nonminor_edits'])
+		self.revert_edits         = int(row['revert_edits'])
+		self.large_edits          = int(row['large_edits'])
+
+		self.edits_per_day        = float(row['edits_per_day'])
 
 	def __str__(self):
-		return self.username + ',' + self.date_of_election + ',' + str(self.isSuccessful) + ',' + str(self.votes) + ',' + \
+		return self.username + ',' + self.election_date + ',' + str(self.isSuccessful) + ',' + str(self.votes) + ',' + \
 			str(self.pages_created) + ',' + str(self.total_edits) + ',' + \
 			str(self.article_edits) + ',' + str(self.user_edits) + ',' + \
 			str(self.user_talk_edits) + ',' + str(self.file_edits) + ',' + str(self.file_talk_edits) + ',' + \
@@ -133,4 +139,5 @@ class User:
 			str(self.total_afd_votes) + ',' + str(self.accounts) + ',' + str(self.featured_lists) + ',' + \
 			str(self.featured_articles) + ',' + str(self.elections) + ',' + str(self.hasFeaturedContent) + ',' + \
 			str(self.hasMultipleAccounts) + ',' + str(self.hasCategoryActivity) + ',' + str(self.images_uploaded) + ',' + \
-			str(self.minor_edits) + ',' + str(self.nonminor_edits) + ',' + str(self.revert_edits) + ',' + str(self.large_edits)
+			str(self.minor_edits) + ',' + str(self.nonminor_edits) + ',' + str(self.revert_edits) + ',' + \
+			str(self.large_edits) + ',' + str(self.edits_per_day)[:3]

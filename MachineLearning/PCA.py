@@ -19,11 +19,12 @@ import matplotlib.pyplot as plt
 
 # Rows are observations, columns are features of each run
 # Turn it into a pandas DataFrame, normalize it
-X = np.recfromcsv("../Data/11_recover.csv",
+X = np.recfromcsv("../Data/19_frequency.csv",
                      delimiter=',', case_sensitive=True, deletechars='', 
-                     replace_space=' ', usecols=(3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,21,22,23,24,25,26,27,28))
+                     replace_space=' ', usecols=(3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,21,22,23,24,25,26,27,28,29,30,31,32,33,34,38,39,40,41,42,43))
 
-df = pd.DataFrame(X, copy=True) 
+df = pd.DataFrame(X, copy=True)
+# df = (df - df.mean()) / df.std()
 df = df / (df.max() - df.min())
 
 n = min(df.shape)
@@ -35,11 +36,16 @@ expVar = np.cumsum(var)
 threshold = 0.95
 numExp = len([x for x in expVar if x < threshold])
 
+i = 0
+for name in list(df):
+    print str(i) + " " + name
+    i += 1
+
 expVarFig = plt.figure()
 expVarPlot = plt.plot(range(0, len(expVar)), expVar,'b', lw = 2)
 thresholdPlot = plt.plot([0, len(expVar)], [threshold, threshold], 'r', lw = 1)
 cutoffPlot = plt.plot([numExp, numExp], [0,1], 'r', lw = 1)
-plt.title('Cumulative Explaiend Variance of PCs')
+plt.title('Cumulative Explained Variance of PCs')
 plt.xlabel('PC')
 plt.ylabel('Portion of Explained Variance')
 plt.savefig('img/PCA/VarianceExplained.png')
